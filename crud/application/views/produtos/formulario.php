@@ -16,7 +16,6 @@ echo form_input(array(
     "maxlength" => "255",
 ));
 
-
 echo form_label("Preco", "preco");
 echo form_input(array(
     "nome" => "preco",
@@ -38,11 +37,7 @@ echo form_button(array(
     "type" => "submit"
 ));
 
-
-
-
 echo form_close();
-
 
 ?>
 </div>
