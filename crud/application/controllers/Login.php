@@ -9,18 +9,19 @@ class Login extends CI_Controller
         $senha = md5($this->input->post("senha"));
         $usuario = $this->Usuarios_model->buscaPorEmailESenha($email, $senha);
         if ($usuario) {
-            $dados = array("mensagem" => "Logado com sucesso");
             $this->session->set_userdata("usuario_logado", $usuario);
+            $this->session->set_flashdata("success" ,"Logado com sucesso");
         } else {
-            $dados = array("mensagem" => "Usuário ou senha inválida.");
+            $this->session->set_flashdata("danger" ,"Usuário ou senha inválida");
         }
 
-        $this->load->view('login/autenticar', $dados);
+        redirect("/");
     }
 
     public function logout()
     {
         $this->session->unset_userdata("usuario_logado");
-        $this->load->view('login/logout');
+        $this->session->unset_userdata("usuario_logado");
+        redirect("/");
     }
 }

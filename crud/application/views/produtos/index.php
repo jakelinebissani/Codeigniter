@@ -1,9 +1,16 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="<?= base_url("css/bootstrap.css") ?>">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
 <div class="container">
+    <?php if($this->session->flashdata("success"))  : ?>
+        <p class="alert alert-success"><?= $this->session->flashdata("success") ?></p>
+        <?php endif ?>
+    <?php if($this->session->flashdata("danger"))  : ?>
+        <p class="alert alert-danger"><?= $this->session->flashdata("danger") ?></p>
+        <?php endif ?>
 
     <h1> Produtos</h1>
     <table class="table">
@@ -14,7 +21,10 @@
             </tr>
         <?php endforeach ?>
     </table>
-    <?php if(!$this->session->userdata("usuario_logado")) : ?>
+    <?php if ($this->session->userdata("usuario_logado")) : ?>
+        <?= anchor('produtos/formulario', 'Novo produto', array("class" => "btn btn-primary")) ?>
+        <?= anchor('login/logout', 'Logout', array("class" => "btn btn-primary")) ?>
+    <?php endif ?>
     <h1>Login</h1>
     <?php
     echo form_open("login/autenticar");
@@ -77,10 +87,7 @@
         "type" => "submit"
     ));
 
-    echo form_close();
-    ?>
-    <?php endif ?>
-    <?= anchor('login/logout','Logout', array("class" => "btn btn-primary"))?>
+    echo form_close(); ?>
     <div>
 </body>
 </html>
